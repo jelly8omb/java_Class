@@ -66,4 +66,10 @@ public class A11StringMethod {
         // String(문자열) : toUpperCase, toLowerCase, concat, substring, replace
         // int : length, indexOf
         // char(문자) : charAt
+
+        // * 24.01.02
+        // * 입력, 처리, 출력 의 과정을 항상 생각하자.
+        // * 문자열 메서드에도 입력, 출력을 생각해 볼 수 있다. 입력은 메서드의 인자, 출력은 메서드의 리턴
+        // * 단, message.charAt(1) == message는 메서드의 실행 주체
+        // * 그리고, 리턴이 없는 메서드가 있을 수 있으며 그 때는 void로 표현된다.
 }
