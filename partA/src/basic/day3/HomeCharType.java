@@ -27,10 +27,19 @@ public class HomeCharType {
         
         for(int i = 0; i<message.length(); i++){
             char a = message.charAt(i);
-            if(){
-                
+            if(Character.isUpperCase(a)){
+                upperCount++;
+            }else if(Character.isLowerCase(a)){
+                lowerCount++;
+            }else if(Character.isDigit(a)){
+                numberCount++;
+            }else {
+                symbolCount++;
             }
         }
+        System.out.println("-----------------------------------");
+        System.out.println("문자열 : " + message);
+        System.out.println("문자 종류 : 대문자 " + upperCount + ", 소문자 " + lowerCount + ", 숫자 " + numberCount + ", 기호 " + symbolCount);
         
 
     }
