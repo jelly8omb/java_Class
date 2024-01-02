@@ -87,3 +87,4 @@
 
 1. vs code : 메뉴에서 pull . github에 있는 소스를 받아오기(동기화)
 2. 새로 작성한 연습 코드 소스 파일은 stage - commit -push
+   (<![image](<images/vs code git push.png>)>)
