@@ -37,7 +37,7 @@ public class HomeCharType {
                 symbolCount++;
             }
         }
-        System.out.println("-----------------------------------");
+        System.out.println("------------------------------------");
         System.out.println("문자열 : " + message);
         System.out.println("문자 종류 : 대문자 " + upperCount + ", 소문자 " + lowerCount + ", 숫자 " + numberCount + ", 기호 " + symbolCount);
         
