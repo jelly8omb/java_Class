@@ -1,5 +1,6 @@
 package basic.day3;
 
+import java.util.Scanner;
 /*
  * 문자열을 구성하는 문자의 종류 분석하기
  * 1) 문자열을 임의로 저장합니다. 예시 : "Hello Java Hi Linux~~~"
@@ -17,5 +18,20 @@ package basic.day3;
  */
 
 public class HomeCharType {
-    
+    public static void main(String[] args) {
+        String message = "Hello* Java Hi* Linux~~~";
+        int upperCount = 0;
+        int lowerCount = 0;
+        int numberCount = 0;
+        int symbolCount = 0;
+        
+        for(int i = 0; i<message.length(); i++){
+            char a = message.charAt(i);
+            if(){
+                
+            }
+        }
+        
+
+    }
 }
