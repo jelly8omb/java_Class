@@ -60,3 +60,29 @@
 - 저장소를 새로 고침하면 커밋한 파일들의 목록을 볼 수 있습니다.
 
 [참고] 로컬저장소는 .git 폴더 삭제하고 원격저장소는 리포지토리만 삭제하면 완전 처음부터 다시 할 수 있습니다.
+
+###### 순서
+
+한번만 할 것들
+git init
+git remote add origin
+git config --global user.email
+git config --global user.name
+
+반복 작업
+
+1. vs code : stage Changes 로 커밋할 파일 선택
+2. vs code : commit 하기. 메세지 꼭 작성하기
+3. vs code : 메뉴에서 push . github로 소스 전송 확인하기
+
+집에서 한번만
+
+1. git clone 원격주소(shift + insert)
+2. git config --global user.email
+3. git config --global user.name
+4. clone 으로 생긴 프로젝트를 vs code 에서 열기
+
+집에서 반복
+
+1. vs code : 메뉴에서 pull . github에 있는 소스를 받아오기(동기화)
+2. 새로 작성한 연습 코드 소스 파일은 stage - commit -push
