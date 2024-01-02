@@ -64,10 +64,11 @@
 ###### 순서
 
 한번만 할 것들
-git init
-git remote add origin
-git config --global user.email
-git config --global user.name
+
+1. git init
+2. git remote add origin
+3. git config --global user.email
+4. git config --global user.name
 
 반복 작업
 
