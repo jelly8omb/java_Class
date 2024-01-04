@@ -6,11 +6,14 @@ import java.util.Arrays;
 public class Score {
     
 
-    
+    // 인스턴스 필드
     private String name;    // 학생 이름
     private int grade;      // 학년
     private int[] jumsues;  // 점수들이 저장될 배열
                             // 배열의 크기는 학년마다 다를 수 있음.
+
+    // 인스턴스 메서드 : 인스턴스 필드를 사용하는 처리를 합니다.
+    // 현재 객체의 점수의 합계(개인 총점)를 리턴하는 sum() 메서드
     public int sum(){
         int sum=0;
         for(int i=0;i<jumsues.length;i++){
@@ -19,6 +22,7 @@ public class Score {
         return sum;
     }
 
+    // 점수의 평균 double 리턴하는 average() 메서드
     public double avg(){
         double avg =0;
         for(int i=0;i<jumsues.length;i++){
@@ -28,6 +32,7 @@ public class Score {
     }
 
     //getter
+    
     public String getName(){
         return name;
     }
@@ -53,13 +58,9 @@ public class Score {
         jumsues = j1;
     }
 
+    // 모든 인스턴스 필드값을 확인 출력하는 printScore() 메서드
     public void printJumsu(){
         System.out.println("이름 = " + name + ", 학년 = " + grade + ", 점수 = " + Arrays.toString(jumsues)+ ", 총점 = " + sum() + ", 평균 = " + avg());
     }
 
-    // 점수의 합계를 리턴하는 sum() 메서드
-
-    // 점수의 평균 double 리턴하는 average() 메서드
-
-    // 모든 인스턴스 필드값을 확인 출력하는 printScore() 메서드
 }                           
