@@ -55,5 +55,27 @@ public class B01MyClassMain {
         * my2.field3 배열의 크기 : 3
         * my2.field3 배열 요소의 값 : [34.12, 23.99, 6.7]
          */
+
+        MyClass2 my3 = new MyClass2();
+
+        // MyClass1 err = new MyClass2(); //error : 객체 타입과 변수의 타입이 불일치
+
+        //private : 사적인, 개인적인. MyClass2 클래스 외에는 사용할 수 없는 필드.
+
+        // System.out.println("my3.field1 : " + my3.field1);   // Stirng
+        System.out.println("my3.field1 : " + my3.getField1());
+        my3.setField1("Hi");
+        System.out.println("my3.field1 : " + my3.getField1());
+
+        // System.out.println("my3.field2 : " + my3.field2);   // int
+        System.out.println("my3.field2 : " + my3.getField2());
+        my3.setField2(321);
+        System.out.println("my3.field2 : " + my3.getField2());
+
+        // System.out.println("my3.field3 : " + my3.field3);   // double
+        double[] dArray = {3.1, 3.2, 3.3};
+        System.out.println("my3.field3 : " + my3.getField3());
+        my3.setField3(dArray);
+        System.out.println("my3.field3 : " + my3.getField3());
     }
 }
