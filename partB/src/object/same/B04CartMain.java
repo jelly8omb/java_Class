@@ -7,32 +7,31 @@ public class B04CartMain {
     
 
     public static void main(String[] args) {
-        Cart cr = new Cart();
-        
-        String[] products = {"과자","음료수","담배","라이터","소주"};
-        int[] prices = {1000, 1200, 5000, 800, 1400};
+        Cart ca = new Cart();
 
-        cr.setUserid("jelly");
-        cr.setProductNames(products);
-        cr.setPrices(prices);
+        String[] products = {"김사과","반하나","이메론","베애리","두리안"};
+        int[] price = {1000,2500,4000,1200,9000};
+
+        ca.setUserid("김머머");
+        ca.setProductNames(products);
+        ca.setPrices(price);
 
         Scanner sc = new Scanner(System.in);
 
-        System.out.println(cr.getUserid() + " 님의 카트");
-        System.out.println(String.format("%s\t %5s\t %s", "번호","상품이름","가격"));
-
-        for(int i=0; i<products.length;i++){
-            System.out.println(String.format("%d\t %5d\t %d", i, products[i], prices[i]));
+        System.out.println(ca.getUserid() + " 님의 카트");
+        System.out.println(String.format("%s\t %s\t %s", "Num.","Name.","Price."));
+        
+        for(int i=0;i<ca.getProductNames().length;i++){
+            System.out.println(String.format("%d\t %d\t %d", i, products[i], price[i]));
         }
+        
+        System.out.println("~~~~~ ----- ~~~~~");
+        int sct = 0;
+        int[] select = new int[5];
+        int c = 0;
 
-        System.out.println("구매 선택 종료 -1");
-        int sel=0;
-        int k=0;
-        int[] select = new int[6];
-        while (sel!=-1 && k<select.length) {
-            System.out.println("상품 번호 입력 ::: ");
+        while (sct!=-1 && c<select.length) {
             
         }
-
     }
 }
