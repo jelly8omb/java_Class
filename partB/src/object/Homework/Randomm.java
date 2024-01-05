@@ -1,4 +1,4 @@
-package object.same;
+package object.Homework;
 
 import java.util.Random;
 
@@ -24,10 +24,10 @@ public class Randomm {
    //  그 값에 다시 +1 하면 됩니다.        1 < 난수*45+1 < 46
    //  난수의 범위를 start ~ end 범위로 조정하려면
    //  (int)(Math.random()*(end-start+1))+start
-   int start = 1; int end=45;
-   for(int i=0;i<10;i++){
-    int temp = (int)(Math.random()*(end-start+1))+start;
-    System.out.println("1~45 범위의 변수 : " + temp);
-   }
+        int start = 1; int end=45;
+        for(int i=0;i<10;i++){
+            int temp = (int)(Math.random()*(end-start+1))+start;
+            System.out.println("1~45 범위의 변수 : " + temp);
+        }
     }
 }

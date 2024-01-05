@@ -1,4 +1,4 @@
-package object.same;
+package object.Homework;
 
 public class Event {
     private String ename;

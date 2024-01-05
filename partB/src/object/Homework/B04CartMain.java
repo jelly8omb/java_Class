@@ -1,4 +1,4 @@
-package object.same;
+package object.Homework;
 
 import java.util.Arrays;
 import java.util.Scanner;
