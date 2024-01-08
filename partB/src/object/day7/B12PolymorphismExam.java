@@ -1,6 +1,5 @@
 package object.day7;
 
-import javax.xml.crypto.Data;
 
 import object.test.Square;
 
@@ -48,7 +47,7 @@ public class B12PolymorphismExam {
         for(int i=0; i<shapes.length; i++){
             if(shapes[i] instanceof Triangle){
                 //반드시 실제 객체가 Triangle일때만 강제 캐스팅합니다. 그렇지 않으면 오류.
-                Triangle temTriangle = (Triangle) shapes[i]
+                Triangle temTriangle = (Triangle) shapes[i];
                 System.out.println("i= " + i + " 는 삼각형입니다. 넓이 : " + shapes[i].calculateArea());
                 temTriangle.printAngle();
             }

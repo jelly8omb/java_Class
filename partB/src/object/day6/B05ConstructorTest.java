@@ -27,7 +27,7 @@ public class B05ConstructorTest {
         //기본생성자와 setter가 없는 MyClass5객체를 만들어보자.
         System.out.println("my5");
         MyClass5 my5 = new MyClass5("java", 111, new double[2]);
-        MyClass5 my6 = new MyClass5(null, 0, null); //error 기본 생성자가 없는 오류
+        // MyClass5 my6 = new MyClass5(null, 0, null); //error 기본 생성자가 없는 오류
         System.out.println("\tmy5 field1, field2, field3 : " + my5.getField1() + ", " + my5.getField2() + ", " + Arrays.toString(my5.getField3()));
 
         MyClass3 test = new MyClass3();
