@@ -30,6 +30,8 @@ public class ADDQUIZMAIN {
         }
         System.out.println("::::: 채점 하고 있습니다. :::::");
         System.out.println("::::: 맞은 개수" + jumsuCounts + "개 입니다.");
+
+        sc.close();
     }
 }
 /*

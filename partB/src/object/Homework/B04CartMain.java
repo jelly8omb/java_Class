@@ -32,5 +32,6 @@ public class B04CartMain {
         while (sct!=-1 && c<select.length) {
             
         }
+        sc.close();
     }
 }

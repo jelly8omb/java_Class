@@ -1,11 +1,9 @@
 package object.Homework;
 
-import java.util.Random;
 
 public class Randomm {
     public static void main(String[] args) {
 
-        Random random = new Random();
 
 
 

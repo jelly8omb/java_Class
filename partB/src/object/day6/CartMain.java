@@ -53,5 +53,6 @@ public class CartMain {
 
         // ca.setTotal_Money(200000); // setter 메서드가 여기서는 필요없음.
                                       // total_Money 메서드가 대신 값을 계산해서 저장함.
+        sc.close();
     }
 }
