@@ -76,6 +76,15 @@ public class Shape {
 			System.out.println("final 메소드 테스트-" + shapeName + "의 너비:" + width +",높이:" 
 					+height + ",면적:" + calculateArea());
 		}
+
+		//day8 Object 클래스의 toString 메서드를 오버라이드
+		@Override
+		public String toString() {
+			return "Shape [도형이름 =" + shapeName + ", 너비=" + width + ", 높이=" + height + "]"
+			+ "][면적 = " + calculateArea() +"]";
+		}
+		
+		
 		
 }
 
