@@ -1,7 +1,5 @@
 package object.day9;
 
-import java.util.ArrayList;
-import java.util.List;
 
 //자바라이브러리의 비교 기능 인터페이스를 활용하기 위한 선행 연습
 public class C20ComparToTest {
