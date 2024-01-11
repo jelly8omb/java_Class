@@ -1,0 +1,35 @@
+(Exam1)
+
+(1)
+public int sum(){
+        int sum=0;
+        for(int i=0;i<X.length;i++){
+            sum += X[i];
+        }
+        return sum
+    }
+
+
+(2)
+public double avg(){
+        double avg = 0;
+        for(int i=0;i<X.length;i++){
+            avg = sum() / X.length;
+        }
+        return avg;
+    }
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+3. 상수
+
+4. Arrays.toString(my1.field3)
+
+5. private
+
+6. new
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+7.X
+
+8.O
