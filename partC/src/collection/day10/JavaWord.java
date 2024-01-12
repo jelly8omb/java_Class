@@ -29,4 +29,16 @@ public class JavaWord {
     public int getLevel() {
         return level;
     }
+
+    public void setEnglish(String english) {
+        this.english = english;
+    }
+
+    public void setKorean(String korean) {
+        this.korean = korean;
+    }
+
+    public void setLevel(int level) {
+        this.level = level;
+    }
 }

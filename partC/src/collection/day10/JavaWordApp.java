@@ -33,23 +33,40 @@ public class JavaWordApp {
             System.out.print("단어 입력 >>> ");
             String findWord = sc.nextLine();
             JavaWord word = myBook.searchWord(findWord);
-            if(findWord.equals("end")){
+            if(findWord.equals("e")){
                 break;
             }
-            System.out.println(String.format("%15s\t %15s\t %3d", word.getEnglish(),word.getKorean(),word.getLevel()));
+            if(word != null){
+                System.out.println(String.format("조회 결과 : %5s\t %5s\t %3d", word.getEnglish(),word.getKorean(),word.getLevel()));
+            }else{
+                System.out.println("단어 없음");
+            }
+            
         }
 
         //(2) List<JavaWord> searchWordByLevel(int level) : 레벨로 조회하기
         // myBook.wordListPrint(list);
+        List<JavaWord> lv = myBook.searcJavaWordByLevel(2);
+        myBook.wordListPrint(lv);
+        
         
 
         //4. 단어를 삭제
-
+        while (true) {
+            System.out.print("삭제할 단어 입력 >>> ");
+            String eng = sc.nextLine();
+            myBook.removeWord(eng);
+            if(eng.equals("e")){
+                break;
+            }
+        }
+        myBook.wordAllPrint();
+        
 
 
         
         
 
-        
+    sc.close();
     }
 }
