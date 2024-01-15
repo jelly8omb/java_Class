@@ -1,4 +1,4 @@
-package collection.day10.day11;
+package collection.day11;
 
 //고객 정보 클래스
 public class Customer {
