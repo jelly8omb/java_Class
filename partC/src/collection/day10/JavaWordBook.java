@@ -27,6 +27,7 @@ public class JavaWordBook {
         this.wordBook.put(word.getEnglish(), word);
     }
     
+    //Map의 특징 - Key 값을 이용해서 조회와 삭제를 할수
     //단어 조회
     public JavaWord searchWord(String english){
         return this.wordBook.get(english);
@@ -38,21 +39,29 @@ public class JavaWordBook {
     }
 
     //전체 단어 출력하기
-    public void wordAllPrint(){
+    public List<JavaWord> wordAll(){
         //TreeMap은 정렬되어 있으므로 Map의 values 를 리스트로 변환하여 출력메소드로 전달하기.
         List<JavaWord> all = new ArrayList<>(this.wordBook.values());
-        wordListPrint(all);
+        return all;
     }
 
     //인자로 전달된 list 출력하기
-    public void wordListPrint(List<JavaWord> list){
+    public void Print(){
             System.out.println("~".repeat(20) + "~ 단어장 ~" + "~".repeat(20));
             System.out.println(String.format("%-15s %-15s\t %s", "<english>","<korean>","<level>"));
 
-            for(JavaWord word : list){
+            for(JavaWord word : this.wordBook.values()){
                 System.out.println(String.format("%-15s %-15s\t %d", word.getEnglish(),word.getKorean(),word.getLevel()));
             }
         }
+
+    public static void wordListPrint(List<JavaWord> list){
+        System.out.println("~".repeat(20) + "~ 단어장 ~" + "~".repeat(20));
+        System.out.println(String.format("%-15s %-15s\t %s", "<english>","<korean>","<level>"));
+        for(JavaWord word : list){
+            System.out.println(String.format("%-15s %-15s\t %d", word.getEnglish(),word.getKorean(),word.getLevel()));
+        }
+    }
 
         public List<JavaWord> searcJavaWordByLevel(int level){
             List<JavaWord> results = new ArrayList<>();
@@ -64,6 +73,8 @@ public class JavaWordBook {
             }
             return results;
         }
+
+        
 
         
 

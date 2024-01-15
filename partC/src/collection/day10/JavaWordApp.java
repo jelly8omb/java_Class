@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.Scanner;
 
 public class JavaWordApp {
+    //JavaWord 는 단어 객체, JavaWordBook 은 단어장 객체
+    //단어장을 시작하는 프로그램입니다.
     public static void main(String[] args) {
         
 
@@ -24,7 +26,7 @@ public class JavaWordApp {
         myBook.addWord(new JavaWord("binary", "2진수의", 3));
 
         //메모장 출력
-        myBook.wordAllPrint();
+        myBook.wordAll();
 
         //3. 단어를 조회
         //(1) 영어단어를 입력하면 찾아주기
@@ -46,8 +48,8 @@ public class JavaWordApp {
 
         //(2) List<JavaWord> searchWordByLevel(int level) : 레벨로 조회하기
         // myBook.wordListPrint(list);
-        List<JavaWord> lv = myBook.searcJavaWordByLevel(2);
-        myBook.wordListPrint(lv);
+        List<JavaWord> list = myBook.searcJavaWordByLevel(2);
+        JavaWordBook.wordListPrint(list);
         
         
 
@@ -60,7 +62,7 @@ public class JavaWordApp {
                 break;
             }
         }
-        myBook.wordAllPrint();
+        myBook.wordAll();
         
 
 
