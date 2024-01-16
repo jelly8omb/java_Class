@@ -1,4 +1,4 @@
-package collection.day12;
+package io.javaword;
 
 import java.util.List;
 

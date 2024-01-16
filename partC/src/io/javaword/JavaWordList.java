@@ -1,35 +1,54 @@
-package collection.day12;
+package io.javaword;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
 import collection.day10.JavaWord;
 
 /**
- * JavaWordApp_V3 : 아래의 JavaWordList 를 이용해서 똑같이 메뉴가 동작하도록 
- *                  변경해 봅시다.
- * 
- * 이 단어장 프로그램이 다른 환경(예로, 웹브라우저)에서 동작할 때
- * 단어 1개, 단어장은 여러개를 갖고 이를 대상으로 하는 메소드(기능)를 명시하고
- * 그리고 단어장도 대체로 생성될 수 있게 합니다.
- * 최후 정리 : 자바단어장 클래스에 적용된 인터페이스까지 생성.
+ * JavaWordApp_V4 : 메모장 list 초기화를 initialize 메소드 사용하지 않고
+ *                  단어장.txt 파일에서 읽어오도록 변경
  */
 public class JavaWordList implements WordList{
-    //private : 현재 클래스에서만 사용할 목적으로 접근 제한합니다.
     private List<JavaWord> words;
+    private String filePath;
     
-    public JavaWordList() {
+    public JavaWordList(String filePath) {
         System.out.println("단어장의 최대 저장 개수 : " + WordList.MAX_LENGTH);
         words = new ArrayList<>();
-        initialize();           //words 리스트 요소를 몇개만 저장해서 초기화(테스트용)
+        this.filePath=filePath;
+    }
+
+    //새로운 단어등록, 기존단어 삭제 등의 변경사항을 파일에 저장하기
+    public void fileSave(){
+        File file = new File("단어장.txt");
+        try(PrintWriter pw = new PrintWriter(file)) {
+            //words 에 있는 리시트의 모든 데이터를 파일로 출력하기
+            for(JavaWord word : words){
+                pw.println(word);
+            }
+        } catch (IOException e) {
+            System.out.println("파일 출력 예외 : " + e.getMessage());
+        }
     }
    
-    public void initialize() {
-        words.add(new JavaWord("public", "공용의", 1));
-        words.add(new JavaWord("public", "공동의", 2));
-        words.add(new JavaWord("private", "사적인", 1));
-        words.add(new JavaWord("iterator", "반복자", 3));
-        words.add(new JavaWord("application", "응용프로그램", 2));
+    //단어장.txt에서 데이터를 읽어와서 words 리스트에 담기
+    public void fileLoad() {
+        try(BufferedReader br = new BufferedReader(new FileReader(filePath))) {
+            String line;
+            while ((line=br.readLine())!=null) {
+                String[] str = line.split(",");
+                JavaWord javaword = new JavaWord(str[0].trim(), str[1].trim(), Integer.parseInt(str[2].trim()));
+                words.add(javaword);
+            }
+        } catch (IOException e) {
+            System.out.println("파일 입력 오류 : " + e.getMessage());
+        }
     }
 
     // 지정된 인덱스 i 의 JavaWord 객체 리턴
