@@ -1,4 +1,4 @@
-package io.day13;
+package io.day14;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
@@ -6,13 +6,32 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
-public class D07ImageFileCopy {
-
-    public static void main(String[] args) {
+public class ThreadTest {
+     public static void main(String[] args) {
         
 
-
-
+        //실행 시간이 오래 걸릴 경우 실행 중이라는 표시를 사용자에게 보여줍니다.
+        //          ㄴ 1초마다 . 출력하기 => 쓰레드로 만듭니다.
+        Runnable runnable = new Runnable() {
+            
+            @Override
+            public void run(){  //쓰레드가 할일을 여기에 코딩
+                boolean run = true;
+                while (run) {
+                    System.out.print(".");
+                    try {
+                        Thread.sleep(500);
+                    } catch (InterruptedException e) {
+                        run = false;
+                    }
+                    //Interrupt : 방해하다, 간섭하다, 끼어들다
+                }
+            }
+        };
+        //쓰레드 생성하기. 할 일은 생성자 인자로 전달.
+        Thread thread = new Thread(runnable);
+        //쓰레드 실행하기.
+        thread.start();
 
         //System에서 시간을 측정할수 있는 메소드 : 나노세컨드 10억분의 1, ms 1000분의 1
         long start = System.nanoTime();
@@ -20,6 +39,10 @@ public class D07ImageFileCopy {
         copyByByte();
         long end = System.nanoTime();
         System.out.println(String.format("소요시간 : %,d ns",(end-start)));
+
+        //4. 쓰레드 종료를 위해 인터럽트 발생하기
+        //thread.stop(); 추천하지않음. 소멸된 메소드
+        thread.interrupt();
     }
     
     public static void copyByByte() {
@@ -38,9 +61,9 @@ public class D07ImageFileCopy {
                 catch(IOException e) {}
             }
         } catch (IOException e) {
-            System.out.println("파일 입출력 제외 : " + e.getMessage());
+            System.out.println("\n파일 입출력 제외 : " + e.getMessage());
         }
-        System.out.println(String.format("복사한 파일 크기 : %,d 바이트",count));
+        System.out.println(String.format("\n복사한 파일 크기 : %,d 바이트",count));
     }
     // count : 1325184
     // 소요시간 : 30,395,863,100 ns
@@ -85,7 +108,4 @@ public class D07ImageFileCopy {
         }
         System.out.println(String.format("복사한 파일 크기 : %,d 바이트",count));
     }
-    //복사한 파일 크기 : 2,595,514 바이트
-    //소요시간 : 16,612,000 ns
 }
-
