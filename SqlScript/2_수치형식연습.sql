@@ -11,10 +11,14 @@ CREATE TABLE tbl_number(
 	zcol2 NUMBER(2,5)		-- 소수점이하 최대 5자리(0이 3개 고정) , 0아닌 유효 숫자 최대 2자리. n<m 인 경우
 );
 
+SELECT * FROM TBL_NUMBER tn ;
+
 -- 0. 모든 컬럼값 정상 실행
 --INSERT INTO 테이블명 (컬럼명,컬럼명,....) VALUES (컬럼순서에 대응되는 값,값,...);
 -- 			  모든 컬럼에 데이터 입력할 때에는 컬럼명 생략 가능합니다.
 INSERT INTO TBL_NUMBER(xcol,ycol,zcol,zcol2) VALUES (123456789,12345,12345.67,0.00012);
+INSERT INTO TBL_NUMBER(xcol,ycol,zcol,zcol2) VALUES (123456789,12345,12345.67,0.00002);
+INSERT INTO TBL_NUMBER(xcol,ycol,zcol,zcol2) VALUES (123456789,12345,12345.67,0.00122);	--error
 INSERT INTO TBL_NUMBER VALUES (123456789,12345,12345.67,0.00012);
 --   0.00010 에서 앞에 0 3개는 유효한 값 , 마지막 0은 무효한 숫자
 --   12300 에서 0 2개는 유효한 값,  00123 에서 0 2개는 무효한 숫자
