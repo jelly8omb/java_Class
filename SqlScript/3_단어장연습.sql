@@ -31,7 +31,7 @@ INSERT INTO TBL_JAVAWORD VALUES (6,'binary','2진수의',2);
 SELECT * FROM TBL_JAVAWORD tj;
 TRUNCATE TABLE TBL_JAVAWORD;
 
--- SELECT 컬럼명1, 컬럼명2... FROM 테이블명 = 값		
+-- SELECT 컬럼명1, 컬럼명2...                           FROM 테이블명 = 값		
 --							[WHERE 컬럼명 = 값] => 특정 컬럼을 조건식으로 조회
 SELECT * FROM TBL_JAVAWORD WHERE STEP IS NOT NULL;
 SELECT * FROM TBL_JAVAWORD WHERE STEP IS NULL;
@@ -42,3 +42,26 @@ SELECT * FROM TBL_JAVAWORD WHERE ENGLISH LIKE '%ic';	-- ic로 끝나는, %기호
 SELECT * FROM TBL_JAVAWORD WHERE ENGLISH LIKE '%ic%';	-- ic로 끝나는, %기호는 상관 ㄴ
 SELECT * FROM TBL_JAVAWORD WHERE IDX BETWEEN 10 AND 20;		-- 10~20
 SELECT * FROM TBL_JAVAWORD WHERE ENGLISH < 'public';
+
+--새로운 연산자
+INSERT INTO TBL_JAVAWORD VALUES (7,'constraint','제약사항',3);
+INSERT INTO TBL_JAVAWORD VALUES (8,'order','순서',3);
+
+--idx값이 2,5,9 인 것만 
+SELECT * FROM TBL_JAVAWORD WHERE IDX = 2 OR IDX = 5 OR IDX = 9;
+SELECT * FROM TBL_JAVAWORD WHERE IDX IN (2,5,9);	-- OR 연산을 간단하게
+
+-- idx 값이 2~5 조회
+SELECT * FROM TBL_JAVAWORD WHERE IDX >=2 AND IDX <=5; -- AND 연산은 BETWEEN 으로 간단하게
+
+
+-- select 컬럼명1, 컬럼명2, ... from 테이블명
+--						[where 컬럼명 = 값] => 특정 컬럼명을 조건식으로 조회
+--						[order by 컬럼명1, 컬럼명2 [DESC]]
+--	=> 지정된 컬럼ㅁ명으로 정렬. DESC 는 내림차순. ASC 오름차순(생략). 컬럼명1이 같은 값이면 컬럼명2로 정렬
+
+SELECT * FROM TBL_JAVAWORD WHERE IDX IN (2,5,9) ORDER BY IDX;
+
+INSERT INTO TBL_JAVAWORD VALUES (2,'private','개인적인',1);
+
+SELECT * FROM TBL_JAVAWORD WHERE IDX IN (2,5,9) ORDER BY IDX , KOREAN ;	

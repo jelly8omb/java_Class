@@ -1,11 +1,16 @@
 /*
+ * 수업 날짜 1월 18일 ~ 19일
  * 제약 조건 constraint - 테이블에 저장되는 데이터가 `요구사항에 대한 부적절한 값`을 갖지 않도록 규정
  * 1. 반드시 값이 있어야한다.	NULL 허용안함
  * 2. 같은 값을 가질수 없다.		UNIQUE (유일한)	*무결성 : 데이터 정확성 유지
  * 3. 1~4 범위로만 한다.		CHECK
  * -----------------------
- * 4. 기본키
- * 5. 
+ * 4. 기본키 : 테이블의 행을 식별(구별) where 기본키컬럼 = 값; 조건실행 했을 때 1개의 행 조회됩니다.
+ * 			 자동으로 인덱스(색인)로 생성이 됩니다. 검색(조회) 속도 향상시키는 방법입니다.
+ * 			 기본키는 NOT NULL 과 UNIQUE 2가지 제약조건에 해당됩니다.
+ * 			 기본키는 테이블에서 1개만 가능합니다. 단, 기본키는 구성하는 컬럼은 1개 이상 (2개, 3개....) 가능합니다.
+ * 5. 외래키 : 테이블 간의 참조를 위해서 사용합니다. 
+ * 			 외래키는 테이블 1개에서 여러 개 만들어질 수 있습니다.
  * */
 -- 제약 조건 컬럼레벨 설정하기
 CREATE TABLE tbl_constr(	
@@ -29,3 +34,52 @@ INSERT INTO TBL_CONSTR (aname,cno,dno) VALUES ('apple',7,3);
 -- INSERT INTO TBL_CONSTR (aname,cno,dno) VALUES ('apple',8,13);	-- 값의 범위 1~4 아님
 
 SELECT * FROM TBL_CONSTR tc;
+
+
+-- 단어장 테이블에 제약 조건을 적용해서 다시 만들어 봅니다.
+-- 기존 테이블 삭제
+DROP TABLE TBL_JAVAWORD;
+/*
+ * `단어장` 프로그램을 위한 테이블
+ * 0. 테이블명 : tbl_javaword
+ * 1. 테이블 구조
+ * 												3. TO DO : 컬럼 값들의 규칙 => 요구사항에 대한 제약조건
+ * 		idx		number(8)							같은 값을 가질수 없다. 반드시 값이 있어야한다.
+ * 		english		varchar2(100)					같은 값을 가질수 없다. 반드시 값이 있어야한다.
+ * 		korean		varchar2(100)					반드시 값이 있어야한다.
+ * 		step		number(1)						반드시 값이 없는 null도 가능하다. 1~4 범위로만 한다.
+ * 		4. TO DO : 검색 속도를 향상시키기 위한 컬럼을 정하자. `데이터 행을 식별` 할수 있는 컬럼을 정해라(기본키 설정)
+ * 
+ * 2. 테이블 행 추가 - 데이터 입력하기
+ * 
+ * */
+
+CREATE TABLE tbl_javaword(
+	idx number(8) PRIMARY KEY,
+	english varchar2(100) UNIQUE NOT NULL,
+	korean varchar2(100) NOT NULL,
+	step number(1) CHECK (step BETWEEN 1 AND 4)			-- CHECK () 괄호 필수
+);
+
+INSERT INTO TBL_JAVAWORD VALUES (1,'public','공용의',1);		--정상
+INSERT INTO TBL_JAVAWORD VALUES (1,'private','사적인',1);		--오류
+INSERT INTO TBL_JAVAWORD VALUES (2,'private','사적인',1);		--오류
+INSERT INTO TBL_JAVAWORD VALUES (NULL,'private','사적인',1);	--오류
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
