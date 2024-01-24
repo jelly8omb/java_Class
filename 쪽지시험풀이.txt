@@ -1,0 +1,26 @@
+//4. 아래 보기와 같은 인터페이스를 뭐라고 하나요?
+        // 익명클래스를 사용한 인터페이스 .... 다른 내부 클래스와는 달리 이름을 가지지 않는 클래스
+            Testable t1 = new Testable(){
+                @Override
+                public void  test(int a, int b){
+                    System.out.println("a + b = " + (a + b));
+                }
+            }
+
+
+
+
+
+        /*
+         * 9. 다음 중 인터페이스의 선언된 구성요소와 생략된 키워드가 잘못 연결된 것을 고르세요.
+         * (public static final, public abstract 는 생략가능)
+         * 1. int calculate(int a, int b); -- public abstract
+         * 
+         * 2. String TYPE = "ALL"; -- public final
+         * 
+         * 3. default void temporary(String test){} -- public
+         * 
+         * 4. static print(){} -- public static void print(){} 가 맞는 말 답은 4번이 됀다.
+         * static 메서드의 경우 abstract 키워드를 사용할 수 없다. 따라서 올바른 매핑은 public static이어야 한다.
+         * 
+         */
