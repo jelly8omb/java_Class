@@ -1,5 +1,6 @@
 {
-  "java.debug.settings.onBuildFailureProceed": true,
+  "java.project.sourcePaths": ["src"],
+  "java.project.outputPath": "bin",
   "java.project.referencedLibraries": [
     "lib/**/*.jar",
     "d:\\JavaClass\\설치프로그램\\lombok.jar",
