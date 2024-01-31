@@ -6,7 +6,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import jdbc.day1.OracleConnectionUtil;
 import project.vo.ProductVo;
@@ -59,5 +61,21 @@ public class TblProductDao {
             System.out.println("ERROR : " + e.getMessage());
         }
         return list;
+    }
+
+    public Map<String, Integer> getPriceTable(){
+        Map<String, Integer> map = new HashMap<>();
+        String sql = "select pcode, price from tbl_product";
+        try (Connection connection = getConnection();
+            PreparedStatement ps = connection.prepareStatement(sql)) {
+                ResultSet rs = ps.executeQuery();
+                while (rs.next()) {
+                    map.put(rs.getString(1), rs.getInt(2));
+                }
+        } catch (SQLException e) {
+            System.out.println("getPriceTable 예외 발생 : " + e.getMessage());
+        }
+        return map;
+        
     }
 }

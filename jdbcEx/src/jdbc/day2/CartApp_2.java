@@ -60,14 +60,13 @@ public class CartApp_2 {
                 case "B":
                     System.out.print("구매_");
                     String name = System.console().readLine();
-                    List<CustomerBuyVo> result3 = buyDao.buyInsert(name);
+                    // int result3 = buyDao.buyInsert(name);
                     break;
                 case "D":
                     System.out.print("구매 취소 번호_");
                     int num = Integer.parseInt(System.console().readLine());
-                    List<CustomerBuyVo> result2 = buyDao.buyDelete(num);
-                    for(CustomerBuyVo vo : result2)
-                                System.out.println(vo);
+                    int result2 = buyDao.buyDelete(num);
+                    
                     
                     break;
                 case "Q":
