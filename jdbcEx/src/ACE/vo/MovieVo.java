@@ -17,7 +17,6 @@ public class MovieVo {
 
     @Override
     public String toString() {
-        return "MovieVo [" + title + ", " + category + ", " + view_age + ", " + price
-                + "]";
+        return String.format("%5s %10s %20s \t %8d", title, category, view_age, price);
     }
 }

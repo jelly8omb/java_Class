@@ -13,7 +13,9 @@
  */
 SELECT PCODE,QUANTITY 
    FROM TBL_BUY tb 
-   WHERE CUSTOMID = 'mina012' AND TO_CHAR(BUY_DATE,'yyyy-mm-dd') = '2023-11-10'; 
+   WHERE CUSTOMID = 'mina012' AND TO_CHAR(BUY_DATE,'yyyy-mm-dd') = '2023-11-10';
+  
+
 
 
 CREATE OR REPLACE PROCEDURE "C##IDEX".money_of_day(
@@ -52,7 +54,7 @@ END;
 
 --   프로시저 실행
   
-     DECLARE               
+DECLARE               
    vmoney NUMBER(10);   --프로시저 실행결과 OUT 매개변수값 저장
    vid tbl_custom.custom_id %TYPE;   --프로시저 실행에 필요한 IN매개변수값 저장변수
    vdate varchar2(20);   --없어도 되지만 출력 등 편의상 선언함.

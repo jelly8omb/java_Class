@@ -16,7 +16,7 @@ public class ViewerVo {
     
     @Override
     public String toString() {
-        return "ViewerVo [custom_id=" + custom_id + ", name=" + name + ", age=" + age + "]";
+        return "ViewerVo [" + custom_id + ", " + name + ", " + age + "]";
     }
 
     

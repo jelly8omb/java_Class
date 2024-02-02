@@ -79,6 +79,17 @@ END;
 
 -- EXEC scarch_custom('hong'); -- 디비버에서는 실행 안됌!
 
+SELECT NAME , AGE
+FROM TBL_CUSTOM tc 
+WHERE tc.CUSTOM_ID  = (
+	SELECT tc.CUSTOM_ID 
+	FROM TBL_BUY tb 
+	WHERE quantity = (
+		SELECT MAX(quantity) FROM TBL_BUY tb2  
+	)
+);
+-- 복습 : 프로시저는 SQL로 만든 프로그램. => 여러 개의 DML 로 구성이 됩니다. PLSQL라고 부릅니다.
+--							 	   => 필요에 따라 조회 결과를 저장하는 변수를 사용할 수 있다.
 
 -- 예제 2.
 -- 구매 수량이 최대인 고객의 이름, 나이 출력하는 프로시저 : max_custom

@@ -31,6 +31,7 @@ SELECT * FROM tbl_viewer tv;
 SELECT * FROM tbl_movie tm;
 
 
+
 CREATE SEQUENCE res_pk_seq START WITH 101;
 
 INSERT INTO tbl_viewer VALUES ('app1e','고길현',17);
@@ -57,4 +58,15 @@ INSERT INTO tbl_reserve VALUES (res_pk_seq.nextval, 'app1e', '더 넌', to_date(
 INSERT INTO tbl_reserve VALUES (res_pk_seq.nextval, 'xodbs' , '어바웃타임' ,to_date('2024-01-01 12:12:12','yyyy-mm-dd hh24:mi:ss'));
 INSERT INTO tbl_reserve VALUES (res_pk_seq.nextval, 'xodbs' , '말죽거리 잔혹사' ,to_date('2024-01-01 12:12:12','yyyy-mm-dd hh24:mi:ss'));
 
-SELECT tr.custom_id, title, price, res_date FROM tbl_reserve tr JOIN tbl_movie tm ON tr.custom_id = tm.custom_id WHERE custom_id = 'app1e';
+SELECT RES_IDX , tv.CUSTOM_ID , NAME , TITLE , RES_DATE  
+FROM TBL_RESERVE tr
+JOIN TBL_VIEWER tv  ON
+tr.CUSTOM_ID = tv.CUSTOM_ID 
+WHERE tv.CUSTOM_ID = 'app1e';
+
+SELECT * FROM TBL_MOVIE WHERE CATEGORY = '공포';
+
+
+
+
+

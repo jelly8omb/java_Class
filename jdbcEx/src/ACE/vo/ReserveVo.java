@@ -19,7 +19,7 @@ public class ReserveVo {
     
     @Override
     public String toString() {
-        return "ReserveVo [res_idx=" + res_idx + ", custom_id=" + custom_id + ", title=" + title + ", res_date="
+        return "예매 번호 : " + res_idx + ", 예매자 닉네임 : " + custom_id + ", 영화 제목 : " + title + ", 예매일 : "
                 + res_date + "]";
     }
 

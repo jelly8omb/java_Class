@@ -1,9 +1,14 @@
 package jdbc.day3;
 
+import java.sql.CallableStatement;
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.sql.Types;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import jdbc.day1.OracleConnectionUtil;
 import project.dao.TblBuyDao;
 import project.dao.TblProductDao;
 import project.vo.BuyVo;
@@ -29,10 +34,19 @@ public class CartApp_4 {
 
     private void showMenu() {
         System.out.println(".".repeat(70));
-        System.out.println("[C] 카테고리별 상품 조회      [P] 상품명 검색     [M]나의 구매내역");
+        System.out.println("[C] 카테고리별 상품 조회      [P] 상품명 검색");
+        System.out.println("[M]나의 구매내역    [T]날짜별 결제 금액 조회");
         System.out.println("[B] 구매하기   [D] 구매 취소  [Q] 구매 수량 변경  [X] 구매 종료");
         System.out.println("::장바구니::[A] 담기  [L] 목록  [R] 삭제   [Y] 모두 구매 ");
         System.out.println(".".repeat(70));
+    }
+
+    private void showMyPay(String customerid){
+        System.out.println("날짜를 입력하면 총 구매금액을 조회합니다.");
+        System.out.print("구매 날짜 입력_");
+        String buydate = System.console().readLine(); //입력형식 yyyy-mm-dd
+
+        System.out.println(String.format("%s - %s - %s", customerid, buydate));
     }
 
     private void showMyPage(String customerid) {
@@ -108,6 +122,8 @@ public class CartApp_4 {
         }
     }
 
+    
+
        //상품 목록을 선택한 카테고리에 대해 보여주기  (구매할 상품 조회)
        //또는 상품명으로 검색 (구매할 상품 조회)
        //또는 입력한 아이디로 구매한 구매내역 보여주기 (구매수량 변경 또는 구매 취소 buy_idx 조회)
@@ -128,30 +144,33 @@ public class CartApp_4 {
             System.out.print("선택 >>> ");    
            // int select = Integer.parseInt(System.console().readLine());
            String select = System.console().readLine();
-            switch (select) {
-                case "M","m":   // 나의 구매내역
+            switch (select.toUpperCase()) {
+                case "M":   // 나의 구매내역
                     showMyPage(customerid);
                     CartApp_41();
                     break;
-                case "C","c":
+                case "C":
                     showProductListByCategory();
                     break;  
-                case "P","p":
+                case "P":
                     searchProductListByPname();    
                     break;
-                case "A","a":
+                case "A":
                     addCartItem(customerid);
                     break;
-                case "L","l":
+                case "L":
                     showCartList();
                     break;
-                case "R","r":
+                case "R":
                     removeCartItem();
                     break;    
-                case "Y","y":
+                case "Y":
                     buyCartItems();
                     break;
-                case "X","x":
+                case "T":
+                    // showMyPay();
+                    break;
+                case "X":
                     run=false;
                     break;                
                 default:

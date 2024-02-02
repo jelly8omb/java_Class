@@ -10,16 +10,16 @@ import lombok.Getter;
 @AllArgsConstructor
 @EqualsAndHashCode
 
-public class RevMvVo {
+public class RevVwVo {
+    private int res_idx;
     private String custom_id;
+    private String name;
     private String title;
-    private int price;
     private Timestamp res_date;
 
     @Override
     public String toString() {
-        return "RevMvVo [" + custom_id + ", " + title + ", " + price + ", " + res_date
-                + "]";
+        return "예매 번호 : " + res_idx + ", 예매자 이름 : "+ name + ", 예매자 아이디 : " + custom_id + ", 영화 제목 : " + title + ", 예매 날짜 : " + res_date;
     }
 
     

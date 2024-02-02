@@ -6,11 +6,11 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import ACE.vo.MovieVo;
-import ACE.vo.RevMvVo;
-import ACE.vo.ViewerVo;
 import jdbc.day1.OracleConnectionUtil;
 
 public class TblMovieDao {
@@ -23,57 +23,55 @@ public class TblMovieDao {
         return DriverManager.getConnection(URL, USERNAME, PASSWORD);
     }
 
-    public int insert(List<RevMvVo> cart){
-        String sql = "INSERT INTO tbl_reserve VALUES (res_pk_seq.nextval,?,?,SYSDATE)";
-        Connection connection = null;
-        PreparedStatement ps = null;
-        int count = 0;
-        try {
-            connection = getConnection();
-            ps = connection.prepareStatement(sql);
-            for(RevMvVo vo : cart){
-                ps.setString(1, vo.getCustom_id());
-                ps.setString(2, vo.getTitle());
-                ps.setTimestamp(3, vo.getRes_date());
-                ps.addBatch();
-                count++;
+    public List<MovieVo> getMovieVO(String category){
+        List<MovieVo> list = new ArrayList<>();
+        Connection connection = OracleConnectionUtil.getConnection();
+        String sql = "SELECT * FROM TBL_MOVIE WHERE TITLE = ?";
+        try (PreparedStatement ps = connection.prepareStatement(sql)) {
+            ps.setString(1, category);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                MovieVo mv = new MovieVo(rs.getString(1), rs.getString(2), rs.getInt(3), rs.getInt(4));
+                list.add(mv);
             }
-            ps.executeBatch();
-            connection.commit();
         } catch (SQLException e) {
-            try {
-                connection.rollback();
-            } catch (SQLException e1) {
-
-            }
-            count=-1;
-            System.out.println("예매 불가능한 항목이 있습니다.");
-            System.out.println("예매 실행 예외 발생 : " + e.getMessage());
-        }finally{
-            try {
-                ps.close();
-                connection.close();
-            } catch (SQLException e1) {
-
-            }
+            System.out.println("getMovieVO ERROR : " + e.getMessage());
         }
-        return count;
+        return list;
     }
 
-    public List<RevMvVo> selectviewMovieList(String custom_id){
-        List<RevMvVo> list = new ArrayList<>();
-        String sql = "SELECT tr.custom_id, title, price, res_date FROM tbl_reserve tr JOIN tbl_movie tm ON tr.custom_id = tm.custom_id WHERE custom_id = ?";
+    public List<MovieVo> selectByPcode(String category){
+        List<MovieVo> list = new ArrayList<>();
         Connection connection = OracleConnectionUtil.getConnection();
+        String sql = "SELECT * FROM TBL_MOVIE WHERE CATEGORY LIKE '%'|| ? ||'%' ORDER BY TITLE";
         try (PreparedStatement ps = connection.prepareStatement(sql)) {
-            ps.setString(1, custom_id);
+            ps.setString(1, category);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                
+                MovieVo mv = new MovieVo(rs.getString(1), rs.getString(2), rs.getInt(3), rs.getInt(4));
+                list.add(mv);
             }
         } catch (SQLException e) {
-            System.out.println("Mypage : " + e.getMessage());
+            System.out.println("selectByPcode ERROR : " + e.getMessage());
         }
-
         return list;
+    }
+
+    public Map<String, Integer> getPrice(){
+        Map<String, Integer> map = new HashMap<>();
+        String sql = "SELECT TITLE, PRICE FROM TBL_MOVIE";
+        try (Connection connection = getConnection();
+            PreparedStatement ps = connection.prepareStatement(sql)) {
+                ResultSet rs = ps.executeQuery();
+                while (rs.next()) {
+                    String title = rs.getString("TITLE");
+                    int price = rs.getInt("PRICE");
+                    map.put(title, price);
+                    System.out.println("영화 제목 : " + title + ", 가격 : " + price);
+                }
+        } catch (SQLException e) {
+            System.out.println("getPrice ERROR : " + e.getMessage());
+        }
+        return map;
     }
 }

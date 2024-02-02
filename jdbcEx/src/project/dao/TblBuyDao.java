@@ -1,10 +1,12 @@
 package project.dao;
 
+import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Types;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -136,5 +138,29 @@ public class TblBuyDao {
             System.out.println("ERROR : " + e.getMessage());
         }
         return list;
+    }
+
+    public int money_of_dayByCustomer(String customid,String buydate){
+        String sql = "{ call money_of_day(?,?,?) }";
+        int money=0;
+        try (
+            Connection connection = getConnection();
+            CallableStatement cstmt = connection.prepareCall(sql)
+            ) {
+            //프로시저의 IN 매개변수값 전달 : setXXX
+            cstmt.setString(1, customid);
+            cstmt.setString(2, buydate);
+
+            //프로시저 OUT 매개변수 1) 타입 설정
+            cstmt.registerOutParameter(3, Types.NUMERIC);
+            cstmt.executeUpdate();      //프로시저 실행
+            // OUT 매개변수 2) 결과값 가져오기 : getXXX
+            money = cstmt.getInt(3);
+            
+        } catch (SQLException e) {
+            System.out.println("money_of_day 프로시저 실행 예외 : " + e.getMessage());
+        }
+
+        return money;
     }
 }
