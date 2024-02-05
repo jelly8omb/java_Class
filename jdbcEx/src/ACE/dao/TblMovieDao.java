@@ -26,7 +26,7 @@ public class TblMovieDao {
     public List<MovieVo> getMovieVO(String category){
         List<MovieVo> list = new ArrayList<>();
         Connection connection = OracleConnectionUtil.getConnection();
-        String sql = "SELECT * FROM TBL_MOVIE WHERE TITLE = ?";
+        String sql = "SELECT * FROM TBL_MOVIE WHERE TITLE = ? ORDER BY CATEGORY";
         try (PreparedStatement ps = connection.prepareStatement(sql)) {
             ps.setString(1, category);
             ResultSet rs = ps.executeQuery();
@@ -74,4 +74,6 @@ public class TblMovieDao {
         }
         return map;
     }
+
+    
 }

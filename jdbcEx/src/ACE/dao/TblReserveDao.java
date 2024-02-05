@@ -8,7 +8,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import ACE.vo.MovieVo;
 import ACE.vo.ReserveVo;
 import ACE.vo.RevVwVo;
 import jdbc.day1.OracleConnectionUtil;
@@ -23,15 +22,13 @@ public class TblReserveDao {
         return DriverManager.getConnection(URL, USERNAME, PASSWORD);
     }
 
-    public int resInsert(MovieVo mv){
-        String sql = "INSERT INTO TBL_MOVIE VALUES (?,?,?,?)";
+    public int resInsert(ReserveVo mv){
+        String sql = "INSERT INTO TBL_RESERVE VALUES (buy2_pk_seq.nextval,?,?,SYSDATE)";
         int result = 0;
         try (Connection connection = getConnection();
             PreparedStatement ps = connection.prepareStatement(sql)) {
-                ps.setString(1, mv.getTitle());
-                ps.setString(2, mv.getCategory());
-                ps.setInt(3, mv.getView_age());
-                ps.setInt(4, mv.getPrice());
+                ps.setString(1, mv.getCustom_id());
+                ps.setString(2, mv.getTitle());
                 result = ps.executeUpdate();
         } catch (SQLException e) {
             System.out.println("regInsert ERROR : " + e.getMessage());
@@ -39,55 +36,81 @@ public class TblReserveDao {
         return result;
     }
 
-    public int resAll(List<ReserveVo> cart){
-        String sql = "INSERT INTO TBL_RESERVE VALUES (res_pk_seq.nextval,?,?,SYSDATE)";
-        Connection connection = null;
-        PreparedStatement ps = null;
-        int count = 0;
-        try {
-            connection = getConnection();
-            ps = connection.prepareStatement(sql);
-            connection.setAutoCommit(false);
-            for(ReserveVo vo : cart){
-                ps.setString(1, vo.getCustom_id());
-                ps.setString(2, vo.getTitle());
-                ps.addBatch();
-                count++;
-            }
-            ps.executeBatch();
-            connection.commit();
-        } catch (SQLException e) {
-            try {
-                connection.rollback();
-            } catch (SQLException e1) {
+    
 
-            }
-            count =- 1;
-            System.out.println("입력 오류");
-            System.out.println("예매 실행 오류 발생 : " + e.getMessage());
-        }finally{
-            try {
-                ps.close();
-                connection.close();
-            } catch (Exception e) {
+    public int resUpdate(String custom_id, ReserveVo mv) {
+        int result = 0;
 
+        if (checkRes(custom_id, mv.getRes_idx())) {
+            String sql = "UPDATE TBL_RESERVE SET TITLE = ? WHERE RES_IDX = ?";
+            try (Connection connection = getConnection();
+                 PreparedStatement ps = connection.prepareStatement(sql)) {
+                ps.setString(1, mv.getTitle());
+                ps.setInt(2, mv.getRes_idx());
+                result = ps.executeUpdate();
+            } catch (SQLException e) {
+                System.out.println("resUpdate ERROR : " + e.getMessage());
             }
+        } else {
+            System.out.println("예매 수정 권한이 없습니다.");
         }
-        return count;
+
+        return result;
     }
     
-    
+    /*
+     * public ViewerVO login(String customid){
+    ViewerVO vo = null;
+    String sql = "SELECT CUSTOM_ID,NAME,AGE FROM TBL_VIEWER tv WHERE CUSTOM_ID = ?";
+    try(Connection connection = getConnection();
+    PreparedStatement pstmt = connection.prepareStatement(sql)) {
+    pstmt.setString(1, customid);
+    ResultSet rs = pstmt.executeQuery();
+        if (rs.next()) {
+            vo = new ViewerVO(rs.getString(1),
+                            rs.getString(2),
+                            rs.getInt(3));
+        }
+    } catch (SQLException e) {
+        System.out.println("Viewer 에외 발생 : " + e.getMessage());
+    }return vo;
+}
+     */
 
-    public int regDelete(int idx){
-        int result = 0;
-        String sql = "DELETE FROM TBL_RESERVE WHERE res_idx = ?";
+    public boolean checkRes(String customid, int res_idx){
+        String sql = "SELECT COUNT(*) FROM TBL_RESERVE WHERE CUSTOM_ID = ? AND RES_IDX = ?";
         try (Connection connection = getConnection();
             PreparedStatement ps = connection.prepareStatement(sql)) {
-                ps.setInt(1, idx);
-                result = ps.executeUpdate();
+                ps.setString(1, customid);
+                ps.setInt(2, res_idx);
+                ResultSet rs = ps.executeQuery();
+                    if (rs.next()) {
+                        return rs.getInt(1) > 0;
+                    }
+                
         } catch (SQLException e) {
-            System.out.println("regDelete ERROR : " + e.getMessage());
+            System.out.println("checkRes ERROR : " + e.getMessage());
         }
+        return false;
+    }
+    
+
+    public int regDelete(String custom_id, int res_idx) {
+        int result = 0;
+
+        if (checkRes(custom_id, res_idx)) {
+            String sql = "DELETE FROM TBL_RESERVE WHERE RES_IDX = ?";
+            try (Connection connection = getConnection();
+                 PreparedStatement ps = connection.prepareStatement(sql)) {
+                ps.setInt(1, res_idx);
+                result = ps.executeUpdate();
+            } catch (SQLException e) {
+                System.out.println("regDelete ERROR : " + e.getMessage());
+            }
+        } else {
+            System.out.println("예매 삭제 권한이 없습니다.");
+        }
+
         return result;
     }
 

@@ -21,6 +21,20 @@ public class TblViewerDao {
         return DriverManager.getConnection(URL, USERNAME, PASSWORD);
     }
 
+    public Boolean checkId(String cid){
+        String sql = "SELECT CUSTOM_ID FROM TBL_VIEWER WHERE CUSTOM_ID = ?";
+        try (Connection connection = getConnection();
+            PreparedStatement ps = connection.prepareStatement(sql)) {
+            ps.setString(1, cid);
+            try(ResultSet rs = ps.executeQuery()){
+                return rs.next();
+            }
+        } catch (SQLException e) {
+            System.out.println("checkId ERROR : " + e.getMessage());
+        }
+        return false;
+    }
+
     public void join(ViewerVo vo){
         String sql = "INSERT INTO TBL_VIEWER VALUES(?,?,?)";
         Connection connection = OracleConnectionUtil.getConnection();
@@ -72,5 +86,50 @@ public class TblViewerDao {
             System.out.println("allViewer ERROR : " + e.getMessage());
         }
         return list;
+    }
+
+    public int getUserAge(String custom_id){
+        int userAge = 0;
+        String sql = "SELECT AGE FROM TBL_VIEWER WHERE CUSTOM_ID = ?";
+        try (Connection connection = getConnection();
+            PreparedStatement ps = connection.prepareStatement(sql)) {
+                ps.setString(1, custom_id);
+            try(ResultSet rs = ps.executeQuery()){
+                if (rs.next()) {
+                    userAge = rs.getInt("AGE");
+                }
+            }
+        } catch (SQLException e) {
+            System.out.println("getUserAge ERROR : " + e.getMessage());
+        }
+        return userAge;
+    }
+
+    public int getAgeLimit(String movietitle){
+        int ageLimit = 0;
+        String sql = "SELECT VIEW_AGE FROM TBL_MOVIE WHERE TITLE = ?";
+        try (Connection connection = getConnection();
+            PreparedStatement ps = connection.prepareStatement(sql)) {
+                ps.setString(1, movietitle);
+            try(ResultSet rs = ps.executeQuery()){
+                if (rs.next()) {
+                    ageLimit = rs.getInt("VIEW_AGE");
+                }
+            }
+        } catch (SQLException e) {
+            System.out.println("getAgeLimit ERROR : " + e.getMessage());
+        }
+
+        return ageLimit;
+    }
+
+    public boolean checkAgeLimit(String custom_id, String movietitle){
+        int Limit = 19;
+
+        int userAge = getUserAge(custom_id);
+        int movieAge = getAgeLimit(movietitle);
+
+        return userAge < Limit && userAge < movieAge;
+        
     }
 }
